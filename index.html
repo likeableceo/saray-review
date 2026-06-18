@@ -80,8 +80,8 @@
   <script>
     const placeId = "ChIJ09aHQwCLhkcR-bmFbRqk8Wg";
     const webUrl = "https://search.google.com/local/writereview?placeid=" + placeId;
-    const androidIntent = "intent://maps.google.com/maps?action=writeReview&placeid=" + placeId + "#Intent;scheme=https;package=com.google.android.apps.maps;end";
-    const iosUrl = "comgooglemaps://?action=writeReview&placeid=" + placeId;
+    const androidIntent = "intent://maps.google.com/maps?q=place_id:" + placeId + "#Intent;scheme=https;package=com.google.android.apps.maps;end";
+    const iosUrl = "comgooglemaps://?q=place_id:" + placeId;
     const iosFallback = "https://apps.apple.com/app/google-maps/id585027354";
 
     const mainBtn = document.getElementById("mainBtn");
