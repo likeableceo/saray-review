@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave a Review – Saray Kebap</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .card {
+      max-width: 360px;
+      width: 100%;
+    }
+    .stars {
+      font-size: 40px;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: #4285F4;
+      color: #fff;
+      margin-bottom: 12px;
+      transition: opacity 0.15s;
+    }
+    .btn:active { opacity: 0.8; }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #444;
+      color: #ccc;
+      font-size: 14px;
+      padding: 12px;
+    }
+    .redirecting {
+      font-size: 13px;
+      color: #666;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+    <h1>Enjoyed your meal?</h1>
+    <p>Leave a review for Saray Kebap-Grill-Pizzeria and help others discover us.</p>
+    <a class="btn" id="mainBtn" href="#">Opening Google Maps…</a>
+    <a class="btn btn-secondary" id="browserBtn" href="https://search.google.com/local/writereview?placeid=ChIJ09aHQwCLhkcR-bmFbRqk8Wg" target="_blank">Open in browser instead</a>
+    <p class="redirecting" id="status">Detecting your device…</p>
+  </div>
+
+  <script>
+    const placeId = "ChIJ09aHQwCLhkcR-bmFbRqk8Wg";
+    const webUrl = "https://search.google.com/local/writereview?placeid=" + placeId;
+    const androidIntent = "intent://maps.google.com/maps?action=writeReview&placeid=" + placeId + "#Intent;scheme=https;package=com.google.android.apps.maps;end";
+    const iosUrl = "comgooglemaps://?action=writeReview&placeid=" + placeId;
+    const iosFallback = "https://apps.apple.com/app/google-maps/id585027354";
+
+    const mainBtn = document.getElementById("mainBtn");
+    const status = document.getElementById("status");
+    const ua = navigator.userAgent;
+
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+    if (isAndroid) {
+      mainBtn.href = androidIntent;
+      mainBtn.textContent = "Open in Google Maps";
+      status.textContent = "Tapping the button will open the Google Maps app.";
+
+    } else if (isIOS) {
+      mainBtn.href = iosUrl;
+      mainBtn.textContent = "Open in Google Maps";
+      status.textContent = "Tapping the button will open the Google Maps app.";
+
+      // If Google Maps app isn't installed, fall back to App Store
+      mainBtn.addEventListener("click", function() {
+        setTimeout(function() {
+          window.location = iosFallback;
+        }, 1500);
+      });
+
+    } else {
+      // Desktop
+      mainBtn.href = webUrl;
+      mainBtn.textContent = "Leave a review on Google";
+      status.textContent = "You're on a desktop — opening in your browser.";
+      document.getElementById("browserBtn").style.display = "none";
+    }
+  </script>
+</body>
+</html>
