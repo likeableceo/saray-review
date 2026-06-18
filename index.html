@@ -80,8 +80,8 @@
   <script>
     const placeId = "ChIJ09aHQwCLhkcR-bmFbRqk8Wg";
     const webUrl = "https://search.google.com/local/writereview?placeid=" + placeId;
-    const androidIntent = "intent://maps.google.com/maps/search/?api=1&query=Saray+Kebap&query_place_id=" + placeId + "#Intent;scheme=https;package=com.google.android.apps.maps;end";
-    const iosUrl = "comgooglemaps://?q=Saray+Kebap&center=45.6154928,8.8392548";
+    const androidIntent = "geo:45.6154928,8.8392548?q=45.6154928,8.8392548(Saray+Kebap)";
+    const iosUrl = "maps://?ll=45.6154928,8.8392548&q=Saray+Kebap";
     const iosFallback = "https://apps.apple.com/app/google-maps/id585027354";
 
     const mainBtn = document.getElementById("mainBtn");
